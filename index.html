@@ -1,182 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAT Cargo VAD LLC</title>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            color: #333;
-        }
-        nav {
-            background: #000;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        nav .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            padding: 80px 20px;
-            background: #111;
-            color: #fff;
-            min-height: 100vh;
-            animation: fadeIn 2s ease-in-out;
-        }
-        .hero-text {
-            max-width: 500px;
-            padding: 20px;
-            animation: slideInLeft 1.5s ease;
-        }
-        .hero-text h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        .hero-text p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .hero-img img {
-            max-width: 400px;
-            width: 100%;
-            border-radius: 10px;
-            animation: slideInRight 1.5s ease;
-        }
-        .section {
-            padding: 60px 20px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        .section p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #555;
-        }
-        .contact {
-            background: #e9e9e9;
-            padding: 60px 20px;
-        }
-        footer {
-            background: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BOUTIQUE FUNERAIRE — Services & Articles Funéraires</title>
+  <meta name="description" content="Boutique Funéraire à Muel (Bretagne) — Services et articles funéraires : accompagnement, cercueils, urnes, marbrerie, fleurs et conseils."/>
+  <style>
+    :root{
+      --primary:#3D2A5A;   /* Deep Purple */
+      --accent:#C9A85F;    /* Soft Gold */
+      --ink:#0b0b0b;
+      --muted:#5d6370;
+      --card:#ffffff;
+      --bg:#ffffff;
+      --nav:#221732;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideInLeft {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-    </style>
+    /* Header */
+    header{background:var(--nav); color:#fff; position:sticky; top:0; z-index:10; box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px}
+    .brand{font-weight:900; letter-spacing:.35px}
+    nav a{display:inline-block; padding:10px 14px; border-radius:12px; color:#efe7ff; font-weight:700}
+    nav a:hover{background:rgba(255,255,255,.12)}
+    .cta-btn{background:var(--accent); color:#271c05; padding:10px 14px; border-radius:12px; font-weight:800}
+
+    /* Hero (animated card) */
+    .hero-wrap{background:linear-gradient(180deg,#ffffff,#f7f4ff); padding:42px 24px}
+    .hero-card{
+      background:var(--card); border:1px solid rgba(0,0,0,.06); border-radius:22px;
+      box-shadow:0 30px 60px rgba(0,0,0,.12); padding:28px;
+      display:grid; grid-template-columns:1.15fr .85fr; gap:22px; overflow:hidden;
+      transform:translateY(24px); opacity:0; animation:cardIn .9s ease-out .15s forwards;
+    }
+    @keyframes cardIn{to{transform:translateY(0);opacity:1}}
+    .hero-badge{display:inline-flex; align-items:center; gap:10px; background:#2a1c3f; color:#ffe8a8; padding:6px 12px; border-radius:999px; font-size:.9rem; font-weight:800}
+    .hero-title{font-size:clamp(26px,4vw,42px); line-height:1.15; margin:14px 0 10px; font-weight:900; color:#0b0b0b}
+    .hero-title .grad{background:linear-gradient(90deg,var(--primary),#7a5fb6); -webkit-background-clip:text; color:transparent}
+    .hero-sub{font-size:1.02rem; color:#2f3140}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .btn{border:2px solid #2a1c3f; color:#fff; background:#2a1c3f; padding:12px 18px; border-radius:14px; font-weight:800}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 8px 16px rgba(0,0,0,.15)}
+    .btn.secondary{background:var(--accent); color:#271c05; border-color:var(--accent)}
+    .hero-media{border-radius:18px; overflow:hidden; aspect-ratio:4/3; background:#fbf9ff;
+      display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:8px}
+    .hero-media img{object-fit:cover; width:100%; height:100%}
+
+    /* Sections */
+    section{padding:56px 24px}
+    section h2{font-size:clamp(22px,3vw,32px); margin:0 0 14px; font-weight:900}
+    .muted{color:var(--muted)}
+
+    /* Cards */
+    .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px}
+    .card{border:1px solid rgba(0,0,0,.06); border-radius:16px; padding:16px; background:#fff; box-shadow:0 8px 24px rgba(0,0,0,.06);
+      transform:translateY(14px); opacity:0}
+    .card.reveal{animation:reveal .7s ease-out forwards}
+    @keyframes reveal{to{transform:translateY(0); opacity:1}}
+
+    /* Gallery */
+    .gallery{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    .gallery img{border-radius:14px; aspect-ratio:4/3; object-fit:cover}
+
+    /* Formula */
+    .formula{border-left:6px solid var(--accent); background:#fff8e6; padding:16px 18px; border-radius:12px}
+    .formula ol{margin:0; padding-left:18px}
+    .formula li{margin:8px 0}
+
+    /* Contact */
+    .contact-box{background:var(--primary); color:#fff; border-radius:18px; padding:20px; display:grid; gap:8px; border:1px solid rgba(0,0,0,.12)}
+    .contact-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+    .contact-actions a{display:inline-block; background:var(--accent); color:#271c05; padding:10px 14px; border-radius:12px; font-weight:800}
+
+    footer{background:#2a1c3f; color:#ffe8a8; padding:18px; text-align:center; font-weight:700}
+
+    @media (max-width:820px){
+      .hero-card{grid-template-columns:1fr; padding:20px}
+      .gallery{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">PAT Cargo VAD LLC</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- Header -->
+  <header>
+    <div class="topbar container">
+      <div class="brand">BOUTIQUE FUNERAIRE</div>
+      <nav>
+        <a href="#about">À propos</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Galerie</a>
+        <a href="#formula">Notre Charte</a>
+        <a href="#contact" class="cta-btn">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <div class="hero" id="home">
-        <div class="hero-text">
-            <h1>PAT Cargo VAD LLC</h1>
-            <p>Your trusted partner in transportation and warehousing. We provide reliable cargo services and storage solutions to meet your business needs with efficiency and care.</p>
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <div class="container">
+      <div class="hero-card">
+        <div>
+          <span class="hero-badge">Services & Articles Funéraires</span>
+          <h1 class="hero-title">Accompagnement digne.<br/><span class="grad">Respect, écoute, simplicité.</span></h1>
+          <p class="hero-sub">Organisation, articles funéraires et conseils personnalisés. Nous vous accompagnons avec discrétion à chaque étape.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#services">Découvrir les services</a>
+            <a class="btn secondary" href="#contact">Demander un devis</a>
+          </div>
+          <p class="muted" style="margin-top:10px;">2 La Landelle, 35290 Muel, Bretagne • +33 7 45 31 17 80 • admin@fresrt.shop</p>
         </div>
-        <div class="hero-img">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=934&q=80" alt="Cargo Services">
+        <div class="hero-media">
+          <img src="https://avatars.mds.yandex.net/i?id=ec416ebb60295deadc8e3ad974ff3e873a71ec1f-16327049-images-thumbs&n=13" alt="Salle de recueillement">
+          <img src="https://avatars.mds.yandex.net/i?id=eb963d997f2e1fbd7699f2d9e2130957d552eec9-16401366-images-thumbs&n=13" alt="Articles funéraires">
+          <img src="https://avatars.mds.yandex.net/i?id=b70a0fbc958f5ca0c226fe91905fbc02d85d4dd8-5332128-images-thumbs&n=13" alt="Cercueils en bois">
+          <img src="https://avatars.mds.yandex.net/i?id=83f1fd7944a5edc4c2f5122127a47f7392f5d40c-11008180-images-thumbs&n=13" alt="Urnes & gravures">
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="section" id="about">
-        <h2>About Us</h2>
-        <p>PAT Cargo VAD LLC is a Domestic LLC based in Arizona, offering specialized services in transportation and warehousing. With a focus on reliability and customer satisfaction, we have been serving businesses since 2021.</p>
-        <p><strong>Registered Address:</strong><br>
-        2902 W Sweetwater Ave, Apt 2190, Phoenix, AZ 85029, United States</p>
+  <!-- About -->
+  <section id="about" class="container">
+    <h2>À propos</h2>
+    <p class="muted">
+      Boutique Funéraire met à votre disposition une équipe attentive et des produits de qualité :
+      cercueils, urnes, plaques, fleurs, marbrerie et accessoires. Nos conseils sont clairs et nos démarches simplifiées.
+    </p>
+    <div class="cards" style="margin-top:12px">
+      <article class="card reveal" style="animation-delay:.00s"><strong>Écoute & respect :</strong> accueil discret et conseils personnalisés.</article>
+      <article class="card reveal" style="animation-delay:.08s"><strong>Qualité des matériaux :</strong> bois et finitions sélectionnés.</article>
+      <article class="card reveal" style="animation-delay:.16s"><strong>Démarches :</strong> accompagnement administratif et logistique.</article>
+      <article class="card reveal" style="animation-delay:.24s"><strong>Transparence :</strong> devis détaillés, sans frais cachés.</article>
     </div>
+  </section>
 
-    <div class="section contact" id="contact">
-        <h2>Contact Us</h2>
-        <p><strong>Email:</strong> <a href="mailto:contact@patcargovadllc.click">contact@patcargovadllc.click</a></p>
-        <p><strong>Agent Address:</strong><br>
-        2902 W Sweetwater Ave, Apt 2190, Phoenix, AZ 85029, United States</p>
+  <!-- Services -->
+  <section id="services" class="container">
+    <h2>Services</h2>
+    <div class="cards">
+      <article class="card reveal" style="animation-delay:.00s">
+        <h3>Organisation & Conseils</h3>
+        <p>Accompagnement des familles, coordination des cérémonies et démarches.</p>
+      </article>
+      <article class="card reveal" style="animation-delay:.08s">
+        <h3>Cercueils & Urnes</h3>
+        <p>Large choix de modèles, essences de bois et personnalisations.</p>
+      </article>
+      <article class="card reveal" style="animation-delay:.16s">
+        <h3>Marbrerie & Plaques</h3>
+        <p>Gravures, monuments, plaques et ornements sur mesure.</p>
+      </article>
+      <article class="card reveal" style="animation-delay:.24s">
+        <h3>Fleurs & Hommages</h3>
+        <p>Compositions florales, rubans personnalisés et livre d’or.</p>
+      </article>
     </div>
+  </section>
 
-    <footer>
-        &copy; 2025 PAT Cargo VAD LLC. All rights reserved.
-    </footer>
+  <!-- Gallery -->
+  <section id="gallery" class="container">
+    <h2>Galerie</h2>
+    <div class="gallery">
+      <img src="https://avatars.mds.yandex.net/i?id=60d119a76f39d45f6d20066ecc0004e20d541f58-5340293-images-thumbs&n=13" alt="Composition florale">
+      <img src="https://avatars.mds.yandex.net/i?id=b70a0fbc958f5ca0c226fe91905fbc02d85d4dd8-5332128-images-thumbs&n=13" alt="Atelier bois">
+      <img src="https://avatars.mds.yandex.net/i?id=eb963d997f2e1fbd7699f2d9e2130957d552eec9-16401366-images-thumbs&n=13" alt="Articles en vitrine">
+      <img src="https://avatars.mds.yandex.net/i?id=83f1fd7944a5edc4c2f5122127a47f7392f5d40c-11008180-images-thumbs&n=13" alt="Urnes">
+    </div>
+  </section>
 
-    <script>
-        // Intersection Observer for fade-in effect
-        const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
+  <!-- Notre Charte (10 points) -->
+  <section id="formula" class="container">
+    <h2>Notre Charte (10 engagements)</h2>
+    <div class="formula">
+      <ol>
+        <li><strong>Accueil digne :</strong> écoute et confidentialité.</li>
+        <li><strong>Transparence :</strong> devis détaillé, options claires.</li>
+        <li><strong>Qualité :</strong> matériaux sélectionnés et finitions soignées.</li>
+        <li><strong>Personnalisation :</strong> gravures, plaques, fleurs et rubans.</li>
+        <li><strong>Respect des délais :</strong> coordination précise des étapes.</li>
+        <li><strong>Démarches simplifiées :</strong> aide administrative et logistique.</li>
+        <li><strong>Accessibilité :</strong> solutions adaptées aux budgets.</li>
+        <li><strong>Éthique :</strong> pratiques responsables et discrètes.</li>
+        <li><strong>Suivi :</strong> contact dédié jusqu’à la clôture du dossier.</li>
+        <li><strong>Amélioration continue :</strong> recueil d’avis pour mieux servir.</li>
+      </ol>
+    </div>
+  </section>
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+  <!-- Contact -->
+  <section id="contact" class="container">
+    <h2>Contact</h2>
+    <div class="contact-box">
+      <div><strong>Entreprise :</strong> Boutique Funéraire</div>
+      <div><strong>Domaine :</strong> Services & articles funéraires</div>
+      <div><strong>Adresse :</strong> 2 La Landelle, 35290 Muel, Bretagne, France</div>
+      <div><strong>Téléphone :</strong> +33 7 45 31 17 80</div>
+      <div><strong>Email :</strong> admin@fresrt.shop</div>
+      <div class="contact-actions">
+        <a href="mailto:admin@fresrt.shop?subject=Demande%20-%20Boutique%20Funeraire" target="_blank" rel="noopener">Nous écrire</a>
+        <a href="tel:+33745311780">Appeler</a>
+        <a href="https://wa.me/33745311780" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=2+La+Landelle+35290+Muel" target="_blank" rel="noopener">Voir sur la carte</a>
+      </div>
+    </div>
+  </section>
 
+  <footer>
+    © 2025 Boutique Funéraire — Tous droits réservés
+  </footer>
+
+  <script>
+    // Reveal-on-scroll for cards
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('reveal'); observer.unobserve(e.target); }
+      })
+    }, {threshold:.15});
+    document.querySelectorAll('.card').forEach(el=>observer.observe(el));
+  </script>
 </body>
 </html>
